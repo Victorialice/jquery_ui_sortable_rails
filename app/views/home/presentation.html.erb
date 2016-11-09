@@ -1,0 +1,44 @@
+<script type="text/javascript">
+  $(function() {
+      smartRollover('.presentation_cbg img');
+      });
+    </script>
+    <div class="activity_bg">
+      <div class="content">
+        <p class="menu_botimg"><img src="/assets/web/presentation_img1.jpg"></p>
+        <div class="presentation_cbg">
+          <p>
+          <a href="/pretz/index.html"><img src="/assets/web/img1_off.jpg"></a>
+          <a href="/doublepretz/index.html"><img src="/assets/web/img2_off.jpg"></a>
+          </p>
+        </div>
+        <a href="" id="here"></a>
+        <div class="img3"><img src="/assets/web/img3.jpg" width="970" height="127"></div>
+        <div class="presentation_c1"> 
+          <table width="920" border="0">
+            <tr>
+              <td width="103" style="color:#fff; line-height:20px">编号</td>
+              <td width="122" style="color:#fff; line-height:20px">手机号码</td>
+              <td width="103" style="color:#fff; line-height:20px">编号</td>
+              <td width="122" style="color:#fff; line-height:20px">手机号码</td>
+              <td width="103" style="color:#fff; line-height:20px">编号</td>
+              <td width="122" style="color:#fff; line-height:20px">手机号码</td>
+              <td width="103" style="color:#fff; line-height:20px">编号</td>
+              <td width="122" style="color:#fff; line-height:20px">手机号码</td>
+            </tr>
+            <% @campaign_award_users.in_groups_of(4).each_with_index do |users, i| %>
+            <tr>
+              <% users.each_with_index do |user, j| %>
+                <td><%= i+j*25+1  %></td>
+                <td><%= user.mark_telphone %></td>
+              <% end %>
+            </tr>
+          <% end %>
+          </table>
+        </div>
+        <div class="v">
+          <img src="/assets/web/img4.jpg" width="970" height="180"> 
+        </div>
+
+      </div>
+    </div>

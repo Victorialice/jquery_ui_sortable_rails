@@ -1,0 +1,75 @@
+<link href="/kindeditor/themes/default/default.css" rel="stylesheet" />
+<script charset="utf-8" src="/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/kindeditor/lang/en.js"></script>
+<script>
+  KindEditor.ready(function(K) {
+    window.editor = K.create('#message', {
+      langType : 'en'
+    });
+  });
+</script>
+<div id="content" class="span10">
+  <div class="row-fluid sortable ui-sortable">
+    <div class="box span12">
+      <div class="box-header well" data-original-title="">
+        <h2><i class="icon-edit"></i>编辑新闻</h2>
+        <div class="box-icon">
+          <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+        </div>
+      </div>
+      <div class="box-content">
+        <%= form_tag admin_news_path, :class => 'form-horizontal' do %>
+          <input name="_method" type="hidden" value="put" />
+          <fieldset>
+            <legend></legend>
+            <div class="control-group">
+              <label class="control-label" for="ctitle">标题</label>
+              <div class="controls">
+                <input type="text" class="span6 typeahead" id="ctitle" name="new[title]" value="<%= @new.title %>" data-required="true" data-error-message="标题不能为空!" />
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="clink">链接地址</label>
+              <div class="controls">
+                <input type="text" class="span6 typeahead" id="clink" name="new[link]" value="<%= @new.link %>" />
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="cimage">发布日期</label>
+              <div class="controls">
+                <input type="text" class="span3 typeahead Wdate" id="cbegindate" name="new[date]" value="<%= @new.date %>" data-required="true" data-required-message="发布日期不能为空" onFocus="WdatePicker({isShowClear:false,readOnly:true})" />
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="cpublic">是否公开</label>
+              <div class="controls">
+                <%= check_box_tag "new[is_public]", 1, @new.is_public, class: "span3 typeahead Wdate", id: "cpublic" %>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="new_create_btn">更新</button>
+            </div>
+          </fieldset>
+        <% end %>
+
+      </div>
+    </div><!--/span-->
+
+  </div>
+</div>
+<script type="text/javascript" src="/js/my97DatePicker/WdatePicker.js"></script>
+<!--<script type="text/javascript" src="/js/parsley/i18n/messages.zh-cn.js"></script>-->
+<script type="text/javascript" src="/js/parsley/parsley.min.js"></script>
+<script type="text/javascript" src="/js/parsley/parsley.extend.js"></script>
+
+
+<script type="text/javascript">
+  $(function (){
+      $('#new_create_btn').click(function (){
+        $('form').parsley('validate');
+        });
+
+      });
+    </script>

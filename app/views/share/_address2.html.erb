@@ -1,0 +1,97 @@
+<p><img src="/assets/web/presentation_ti3.gif" /></p>
+<div class="qtable">
+  <table width="611">
+    <tbody>
+    <tr>
+      <td width="46%" class=cell-question><p class="signup_textL"> 邮政编码<br/>
+        住址2</p>
+        <p><img src="/assets/web/signup/icon2.gif"></p></td>
+      <td width="54%" class=cell-input style="padding:11px 0 11px 15px;">
+        <input type="text" class="text_field3" name="postcode" >
+        <br/>
+        <input type="text" class="text_field2" name="address2" ></td>
+    </tr>
+    <tr>
+      <td class=cell-question><p class="signup_textL">手机号码</p>
+        <p><img src="/assets/web/signup/icon2.gif"></p></td>
+      <td class=cell-input><input name="telphone" type="text" class="text_field"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<p class="presentation_ic"><a href="javascript:;" id="join_camp_addr2"><img src="/assets/web/presentation_icon3.gif" /></a></p>
+
+<script type="text/javascript">
+  $(function (){
+      $('#join_camp_addr2').click(function (){
+          $.ajax({
+              beforeSend: send_xhr(),
+              type: 'post',
+              url:  '/users/join_campaign',
+              data: {
+                  postcode:  $('input[name="postcode"]').val(),
+                  address2:  $('input[name="address2"]').val(),
+                  telphone:  $('input[name="telphone"]').val()
+              },
+              async: false,
+              dataType: 'json',
+              success: function(data){
+                  if(data.success === 'yes'){
+                      alert('参与活动成功!');
+                  } else if(data.success === 'nocampagin'){
+                      alert('暂时无最新活动参加');
+                  }else {
+                      alert('您已经参加过了此次活动!');
+                  }
+              }
+          });
+      }); //#join_camp_addr2
+      $('#address1_join').click(function (){
+          //alert($('#postcode').val()=="");
+          var arr = []
+          var alert_flag = false;
+          if($('#name').val() == ""){
+              alert_flag = true;
+              arr.push("姓名");
+          }
+          if($('#postcode').val() == ""){
+              alert_flag = true;
+              arr.push("邮编");
+          }
+          if($('#detail_address').val() == ""){
+              alert_flag = true;
+              arr.push("住址");
+          }
+          if($('#telphone').val() == ""){
+              alert_flag = true;
+              arr.push("手机号码");
+          }
+          if(alert_flag == true){
+            alert("请填写" + arr.join("、")) +"。";
+            return false;
+          }
+          $.ajax({
+              beforeSend: send_xhr(),
+              type: 'post',
+              url:  '/users/join_campaign1',
+              data: {
+                  name:  $('#name').val(),
+                  postcode:  $('#postcode').val(),
+                  detail_address:  $('#detail_address').val(),
+                  telphone:  $('#telphone').val()
+              },
+              async: false,
+              dataType: 'json',
+              success: function(data){
+                  if(data.success === 'yes'){
+                      alert('参与活动成功!');
+                  } else if(data.success === 'nocampagin'){
+                      alert('暂时无最新活动参加');
+                  }else {
+                      alert('您已经参加过了此次活动!');
+                  }
+              }
+          });
+      }); //#address1_join
+  });
+</script>

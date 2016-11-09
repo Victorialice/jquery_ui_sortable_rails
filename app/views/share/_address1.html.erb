@@ -1,0 +1,37 @@
+<p><img src="/assets/web/presentation_ti2.gif" /></p>
+<div class="qtable">
+  <table width="611">
+    <tbody>
+    <tr>
+      <td width="46%" class=cell-question>
+        <p class="signup_textL">
+        <label for=name>姓名</label><span style="color:#ff3300;padding: 3px 0 0 9px;">※请使用真实姓名</span>
+        </p>
+      </td>
+      <td width="54%" class=cell-input>
+        <input type="text" id="name" class="text_field3" value="<%= current_user.name %>" >
+      </td>
+    </tr>
+    <tr>
+      <td class=cell-question><p class="signup_textL"> 邮政编码<br/>
+        住址1</p>
+        <p><img src="/assets/web/signup/icon.gif"></p>
+      </td>
+      <td class=cell-input style="padding:11px 0 11px 15px;">
+        <input type="text" id="postcode" class="text_field3" value="<%= current_user.postcode %>" >
+        <br/>
+        <input type="text" id="detail_address" class="text_field2" value="<%= current_user.detail_address %>" style="width: 330px;" ></td>
+    </tr>
+    <tr>
+      <td class=cell-question>
+        <p class="signup_textL">手机号码</p>
+        <p><img src="/assets/web/signup/icon.gif"></p></td>
+      <td class=cell-input><input type="text" id="telphone" class="text_field"  value="<%= current_user.telphone %>"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<ul>
+  <li><a href="javascript:;" id="address1_join"><img src="/assets/web/presentation_icon1.gif" /></a></li>
+  <li><a href="<%= edituser_path(current_user.id) %>"><img src="/assets/web/presentation_icon2.gif" /></a></li>
+</ul>

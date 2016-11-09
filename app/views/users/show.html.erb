@@ -1,0 +1,290 @@
+<div class="mypage_content">
+<div class="mypage_bg1">
+<div class="mypage_bg2">
+<div class="mypage_conlist">
+<div class="mypage_title">
+  <div class="mypage_tiL">
+    <p class="mypage_ti1">我的主页</p>
+    <p class="mypage_ti2">欢迎，<%= current_user.nickname %>!</p>
+  </div>
+  <div class="mypage_tiR"><a href="#" class="quit">》退出</a></div>
+</div>
+<div class="mypage_conleft">
+  <p class="mypage_topimg"><img src="/assets/web/left_topimg.png" /></p>
+  <div class="mypage_c1zbg">
+    <p><img src="/assets/web/mypage_ti1.gif" /></p>
+    <div class="mypage_c1list">
+      <p><a href="<%= @campaign.try(:link) %>"><img src="<%= @campaign.try(:image).try(:url) %>" width="280" height="130" /></a></p>
+      <div class="mypage_c1Rt">
+        <p class="mypage_c1Rtext"><%= @campaign.try(:content) %></p>
+        <p>
+          <% if @campaign %><%= show_campaign_three_status %><% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p><img src="/assets/web/left_botimg.png" width="635" height="20" /></p>
+</div>
+<div class="mypage_conright">
+  <p class="mypage_topimg"><img src="/assets/web/right_topimg.png" />
+  <div class="mypage_c1zbg">
+    <p><img src="/assets/web/mypage_ti2.gif" /></p>
+    <div class="mypage_c2text">用户名：<%= current_user.name %><br />
+      邮件地址：<%= current_user.login %><br />
+      <p style="float: left;">所在地区：</p><span class="ellipsis"><%= current_user.detail_address %></span>
+    </div>
+    <p><a href="<%= edituser_path(current_user.id) %>"><img src="/assets/web/mypage_ricon1.gif" /></a></p>
+    <p class="mypage_c2text2">
+    <a id="terms_link" href="#">》查看网站条款</a><br />
+ <% if current_user.origin.blank? %>
+   <a id="withdraw_link" href="<%= withdraw_user_path(current_user.id) %>">》办理退会请点击这里</a>
+ <% else %>
+   <a id="withdraw_link" data-role="sns" href="javascript:void(0)">》办理退会请点击这里</a>
+ <% end %>
+   </p>
+  </div>
+  <p><img src="/assets/web/right_botimg.png" /></p>
+  </p>
+</div>
+<div class="mypage_list">
+<p class="mypage_topimg"><img src="/assets/web/topimg.png" /></p>
+<div class="mypage_listbg">
+<p><img src="/assets/web/mypage_ti3.gif" /></p>
+<ul class="mypage_list2" id="my_campagin_lists">
+    <% current_user.join_campaigns.each do |cr| %>
+        <li style="position: relative;" data-award-id="<%= cr.id %>">
+          <a href="javascript:;">
+            <p class="mypage_list2L"><%= cr.begin_date.strftime('%Y.%m') %> <%= cr.title %></p>
+            <p class="mypage_list2R"><img src="/assets/web/mypage_icon2_off.png" /></p>
+          </a>
+        </li>
+    <% end %>
+</ul>
+  <% current_user.join_campaigns.each do |cr| %>
+      <ul class="mypage_list3" id="award_list_<%= cr.id %>" style="display: none;position: absolute;">
+        <% cr.campaign_award_users.in_groups_of(4).each_with_index do |users, i| %>
+          <% users.each_with_index do |user, j| %>
+            <li><p class="name_length"><%= i+j*25+1 %></p><p class="tel_length"><%= user.mark_telphone %></p></li>
+          <% end %>
+        <% end %>
+      </ul>
+  <% end %>
+</div>
+<p><img src="/assets/web/botimg.png" /></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script type="text/html" id="rightnow_sure_info">
+  <div class="qtable2_box">
+    <table width="611">
+      <tbody>
+      <tr>
+        <td width="9%" class="qtable2_number">01</td>
+        <td width="45%" class="qtable2_text">姓名 </td>
+        <td width="46%" class="qtable2_text"><%= current_user.name %></td>
+      </tr>
+      <tr>
+        <td class="qtable2_number" >02</td>
+        <td class="qtable2_text">所在地区</td>
+        <td class="qtable2_text"><%= current_user.address2 %></td>
+      </tr>
+      <tr>
+        <td class="qtable2_number" >03 </td>
+        <td class="qtable2_text">送付先住所</td>
+        <td class="qtable2_text"><%= current_user.detail_address %></td>
+      </tr>
+      <tr>
+        <td class="qtable2_number" >04</td>
+        <td class="qtable2_text">手机号码</td>
+        <td class="qtable2_text"><%= current_user.telphone %></td>
+      </tr>
+      </tbody>
+    </table>
+    <button id="sure_join_campaign" data-campaign-id="<%= @campaign.id %>">确认，参与</button>
+    <a href="<%= edituser_path(current_user.id) %>">修改资料</a>
+  </div>
+</script>
+
+<div id="from_auth" style="display: none;">
+  <div class="login2_box">
+    <p><img src="/assets/web/login2_ti.gif"></p>
+    <p><input name="auth_email" type="text" class="login2_input" id="from_auth_login"></p>
+    <p><input type="button" class="login2_icon" value="" id="submit_auth_email"></p>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function (){
+      if (location.href.indexOf('from_auth') > 0) {
+          $.fancybox($('#from_auth').html(), {
+              maxWidth	: 490,
+              maxHeight	: 224,
+              autoSize	: false,
+              openEffect	: 'none',
+              closeEffect	: 'none',
+              afterLoad    : function (){
+                  $(document).on('click', '.fancybox-skin #submit_auth_email', function (){
+                      var ep    = $(this).parent().prev().find('#from_auth_login');
+                      var email = $.trim( ep.val() );
+                      if (email === ""){
+                          alert('请输入您的邮箱地址!');
+                          return false;
+                      }
+                      var emailregExp = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
+                      if (emailregExp.test(email) === false) {
+                          alert('请输入正确的邮箱地址!');
+                          return false;
+                      }
+
+                      //
+                      $.ajax({
+                          beforeSend: send_xhr(),
+                          type: 'put',
+                          url:  '/users/update_email_from_auth',
+                          data: {auth_email: email},
+                          async: false,
+                          dataType: 'json',
+                          success: function(data){
+                              if(data.success === 0){
+                                  alert('该邮箱地址已经被注册!');
+                                  ep.val('');
+                                  return false;
+                              } else {
+                                  alert('邮箱地址设置成功!');
+                                  $.fancybox.close();
+                              }
+                          }
+                      });
+
+                      //
+                  });
+              }
+          });
+      }
+
+      $('#terms_link').click(function (){
+          $.fancybox($('#site_terms').html(),{
+          maxWidth  : 650,
+          maxHeight : 457,
+          autoSize  : false,
+          openEffect  : 'none',
+          closeEffect : 'none'
+          });
+      return false;
+      });  //terms_link
+
+      $('#withdraw_link').click(function (){
+          if($(this).attr("data-role") !== undefined){
+            alert("您是SNS用户，无需退会。");
+            return false;
+          }
+          if(window.confirm('您确定要退会吗？退会后您将无法再使用该邮箱帐号登录')){
+          $.ajax({
+            beforeSend: send_xhr(),
+            type: 'put',
+            url:  $(this).attr("href"),
+            async: false,
+            dataType: 'json',
+            success: function(data){
+              if(data.success === "OK"){
+              alert(data.msg);
+              location.href = "/"
+              return false;
+              } else {
+              alert(data.msg);
+              }
+            }
+          });
+          }
+        return false;
+      });  //withdraw_link
+  });
+</script>
+<script type="text/html" id="site_terms">
+<div style="border:3px #ff0000 double;"><br>
+  <p>格力高乐园是上海江崎格力高食品有限公司（以下简称“上海格力高”）运营的服务（以下简称“本服务”）。
+    使用本服务的会员必须遵守《格力高乐园利用规章》（以下简称“本规章”）的规定。如你使用本服务，视为你已经同意了本规章。如果你不同意本规章的规定，就不能使用本服务，敬请谅解。
+    如上海格力高公司网站或上海格力高公司网站里的各网页上其它服务有相应的规章，且该规章内容和本规章内容有冲突，会员在使用这些服务时，应遵守与该服务相对应的规章。 </p>
+  <br>
+  <h4>第一条 （规章的适用）</h4>
+  <p>1. 本规章适用于使用本服务的会员。</p>
+  <p>2. 会员登陆成功时，即应诚实得遵守本规章的规定。</p>
+  <p>3. 上海格力高有权随时对本规章进行修改或补充，修改或补充内容与原规章内容有冲突的，以修改或补充后的内容为准。</p>
+  <br>
+  <h4>第二条（会员登陆）</h4>
+  <p>1. 本网站的会员，是指按照上海格力高规定的程序申请会员登记并获得上海格力高确认登录成功的自然人、法人或其它组织。</p>
+  <p>2. 使用本服务无须缴纳入会费或会费等费用。</p>
+  <p>3. 会员需自行登录、设定“用户名”、“呢称”及“密码”并进行管理和使用，承担与此有关的一切责任。上海格力高不对因会员的使用上的错误或第三者的不正当的使用导致的后果或损失承担任何责任。</p>
+  <p>4. 会员如须对本服务的登录信息进行变更或退会，请在格力高乐园登陆，按照该页内关于“登记信息变更”和“退会”的操作流程办理相关手续。
+    另，如忘记邮件地址、密码，请点击下面选项。</p>
+  <p><a onClick="window.open(this.href);return false;" href="https://glico-cp.com.cn/forgot_password">■忘记密码</a></p>
+  <br>
+  <h4>第三条（服务的提供）</h4>
+  <p>1. 会员登陆后可无偿使用本网站提供的各种服务。但须自行承担通讯费等登陆本网站所需的费用。</p>
+  <p>2. 上海格力高可能会根据会员登陆的邮箱地址或通过其他联系方式将本服务信息送交会员。</p>
+  <p>3. 上海格力高有权随时变更本网站的内容或停止提供本网站上的服务、关闭本网站，无须提前通知会员。</p>
+  <br>
+  <h4>第四条（会员的通知）</h4>
+  <p>1. 除非另有特别的规定，上海格力高会通过电子邮件或在本网站上公告的方式或其他上海格力高认为适当的方式对会员发送通知。</p>
+  <p>2. 如前项通知是用电子邮件发送，自该邮件到达会员的电子邮件地址的服务器时视为送达。会员应及时阅读该通知。</p>
+  <p>3. 如本条第1项的通知是通过在本网站上公告的形式送达的，自该通知本网站上公告时视为送达。</p>
+  <br>
+  <h4>第五条（会员的义务或禁止事项）</h4>
+  <p>会员在使用本网站时，不得有下列行为，否则上海格力高有权取消该会员的资格，如因会员的下列行为给上海格力高造成损害的，应当对上海格力高由此遭受的一切损失承担赔偿责任。</p>
+  <p>1. 入会时提供虚假信息</p>
+  <p>2. 将会员资格或在本网站接受服务的权利转让、借与第三人。</p>
+  <p>3. 诽谤或中伤他人或上海格力高，毁损名誉的行为。</p>
+  <p>4. 侵害他人的财产和隐私的行为。</p>
+  <p>5. 发送或书写有害的程序或违反公序良俗的信息，不正当的访问，窜改数据等行为。</p>
+  <p>6. 把本网站提供的信息、作品供他人使用或者复制、销售该信息或作品的，其它侵害著作权等知识产权的行为。</p>
+  <p>7. 其它妨碍本网站运营的行为。</p>
+  <p>8. 其它违反本规章或上海格力高规定的行为，或其它不正当行为或违法行为。</p>
+  <p>9. 其它违犯国内外的网络通用规则的行为。</p>
+  <br>
+  <h4>第六条（著作权）</h4>
+  <p>本服务中包含的全部的内容(信息，图解，标志，按钮图标，图像等)，著作权归属于上海格力高或内容提供者。会员承诺在《中华人民共和国著作权法》允许的范围内使用本服务。禁止在其它任何地方使用本服务的任何内容（包括代言人的照片、动画等）。</p>
+  <br>
+  <h4>第七条（商标）</h4>
+  <p>本服务中涉及的商标和标识的相关权利归上海格力高所有。未经许可，禁止使用。</p>
+  <br>
+  <h4>第八条（服务的暂时中断）</h4>
+  <p>因服务器系统维护或发生故障或其它原因（包括但不限于火灾、停电、地震、技术上需要或上海格力高需要暂停服务等）造成本服务暂时中断的，上海格力高无须提前通知会员，如因此造成损失的，上海格力高不承担任何赔偿责任。</p>
+  <br>
+  <h4>第九条（服务的变更、终止）</h4>
+  <p>上海格力高有权随时变更本网站的内容、改变网址或停止提供本网站上的服务，无须提前通知会员。</p>
+  <br>
+  <h4>第十条（免責事項）</h4>
+  <p>上海格力高应尽注意义务提供关于本服务的信息。但因技术原因或时间变化可能会导致服务信息有误，上海格力高不对信息的完全性、正确性、最新性、有用性、目的适合性做任何保证。同时，上海格力高不对因本服务的使用导致的软件或硬件上的事故，或使用者之间的纠纷，或其它事故造成的损失承担任何赔偿责任。</p>
+  <br>
+  <h4>第十一条(个人信息的使用、管理)</h4>
+  <p>会员个人信息的使用及管理，详见《格力高乐园使用规章》中的“隐私条款”。</p>
+  <br>
+  <p><a onClick="window.open(this.href);return false;" href="https://glico-cp.com.cn/privacypolicy">■隐私条款</a></p>
+  <br>
+  <p>上海格力高使用“cookie”技术。</p>
+  <p><a onClick="window.open(this.href);return false;" href="https://glico-cp.com.cn/privacypolicy">■关于“cookie”技术</a></p>
+  <br>
+  <h4>第十二条（网站链接）</h4>
+  <p>原则上，会员可以在自己的网页上设置链接，链接本网站，但本网站的网址可能会改变，由此可能会给会员带来不便，特此告知。
+    但有诽谤中伤内容、违背公序良俗的内容或违法内容的网站禁止链接本网站。</p>
+  <br>
+  <p>本网站可能会设置链接，会员通过该链接可以链接到其它非上海格力高的网站上，由于被链接的网站不属于上海格力高运营和管理，因此，上海格力高不对会员因链接该网站或使用链接网站上的内容所遭受的一切损失承担任何责任。</p>
+  <br>
+  <h4>第十三条（作品、信息或建议的提供）</h4>
+  <p>会员可以向上海格力高提供作品、信息、想法或建议等，但相关作品的著作权以及与信息、想法或建议相关的所有权利属于上海格力高所有，法律另有规定的除外。
+    同时，除非上海格力高事先明确表明支付对价，否则上海格力高无须就会员提供的上述作品、信息、想法和建议等支付任何报酬。上海格力高可以不受任何限制地使用上述作品、信息、想法和建议。</p>
+  <br>
+  <h4>第十四条（《格力高乐园利用规章》的变更）</h4>
+  <p>上海格力高有权根据需要对本规章的内容进行变更，会员承诺会遵守变更后的新的规章。</p>
+  <br>
+  <h4>第十五条（纠纷处理）</h4>
+  <p>因本规章或本服务引起的一切纠纷由上海市黄浦区人民法院根据中国相关法律法规的规定进行裁决。</p>
+  <br>
+  <p>（附則）</p>
+  <p>本规章从2009年5月1日开始施行。</p>
+  <br>
+  <br>
+</div>
+</script>

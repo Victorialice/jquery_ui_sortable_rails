@@ -1,0 +1,33 @@
+<div class="activity_bg">
+  <div class="content">
+    <div class="wlogin_bg">
+      <div class="wlogin_text">
+        <p class="wlogin_title">桌面宠物<span>“百奇小精灵”</span>火热出炉了！</p>
+        <p>你可以在电脑里培养属于你自己的百奇小精灵！<br />
+          在你桌面上跑来跑去，和你一起笑，哭，生气！<br />
+          请好好照顾有点囧的它！</p>
+        <p style="padding-bottom:11px;">不同的培养方法，所养成的百奇也会各式各样，<br />
+          一共会有多少种呢？？</p>
+      </div>
+        <% unless logined? %>
+          <%= render partial: "wlogin_list" %>
+        <% else %>
+          <div class="wlogin_redbox">
+            <div class="login2_img">
+              <p><img src="/assets/web/widget/login2_ti.gif" /></p>
+              <p><a href="/widget/index"><img src="/assets/web/widget/login2_icon.gif" /></a></p>
+            </div>
+          </div> 
+        <% end %>
+      </div>
+    <p><img src="/assets/web/widget/login_botimg.jpg" /></p>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function (){
+      $('#make_new_captcha').click(function (){
+          $('#captcha_img_src').attr('src', '/captcha?action=captcha&i='+ new Date().getTime());
+          return false;
+      });
+  });
+</script>

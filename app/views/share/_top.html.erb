@@ -1,0 +1,131 @@
+<div class="main" style="position: relative;">
+<div id="menu_03"><a href="/activity"><img src="/assets/web/menu03_off.gif" /></a></div>
+  <div class="header" id="c_header">
+    <p class="logo"><a href="/"><img src="/assets/web/logo.jpg" /></a></p>
+    <div class="header_right">
+      <div class="bshare-custom">
+        <div class="bsPromo bsPromo2"></div>
+        <a class="bshare-qzone" title="分享到QQ空间" buttonIndex="0"></a><a class="bshare-sinaminiblog" title="分享到新浪微博" href="javascript:void(0);"></a><a class="bshare-kaixin001" title="分享到开心网" href="javascript:void(0);"></a><a class="bshare-renren" title="分享到人人网" buttonIndex="0"></a><a class="bshare-more bshare-more-icon more-style-addthis" title="更多平台" buttonIndex="0" index="0"></a></div>
+      <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+      <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+      <div class="header_login">
+        <% if logined? %>
+            <a href="<%= mypage_path(current_user.id) %>">我的主页</a> | <a href="#" class="quit">退出</a>
+        <% else %>
+            <a href="#" class="member_logined">会员登录</a> | <a href="<%= signup_path %>">会员注册</a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="headerTop" id="id_header_top" style="z-index: 1001; width:1000px; left:130px; height: 50px; margin:0 auto ; position: absolute; top: 30px;">
+    <p class="homepage">
+      <a href="/"><img src="/assets/web/menu01_off.gif" /></a>
+    </p>
+    <div class="navArea">
+      <ul class="navi" id="top-header" style="display: block;height: 50px;padding: 0;">
+        <li>
+          <a href="#"><img src="/assets/web/menu02_off.gif"></a>
+          <ul class="navCategory menu hidden" style="padding-left: 2600px;">
+            <li>&nbsp;</li>
+            <li>
+              <a href="#" class="menu-dq">百奇系列</a>
+              <ul class="sub">
+                <li><a href="/pocky/index.html">百奇</a></li>
+                <li><a href="/moussepocky/index.html">慕思百奇</a></li>
+                <li><a href="/lilipocky/index.html">粒粒百奇</a></li>
+                <li><a href="/crushpocky/index.html">扁桃仁脆百奇</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="menu-dq"> 百力滋系列</a>
+              <ul class="sub">
+                <li><a href="/pretz/index.html">百力滋</a></li>
+                <li><a href="/doublepretz/index.html">双层百力滋</a></li>
+              </ul>
+            </li>
+            <li><a href="/pejoy/index.html">百醇</a></li>
+            <li><a href="/caiyuan1/index.html">菜园小饼</a></li>
+            <li>
+              <a href="#" class="menu-dq">巧系列</a>
+              <ul class="sub">
+                <li><a href="/cookie/index.html">巧酥酥</a></li>
+                <li><a href="/cake/index.html">巧心柔</a></li>
+              </ul>
+            </li>
+            <li><a href="/shortbread/index.html">小布蕾</a></li>
+            <li><a href="/mousa/index.html">慕纱</a></li>
+            <li><a href="/caplico/index.html">泡丽可</a></li> 
+            <li>
+              <a href="/family/index.html" class="menu-dq">亲子分享系列</a>
+              <ul class="sub">
+                <li><a href="/kittyland/index.html">奇蒂</a></li>
+                <li><a href="/minikitty/index.html">森林奇遇</a></li>
+                <li><a href="/collon/index.html">可珑</a></li>
+                <li><a href="/sinky/index.html">星奇</a></li>
+                <li><a href="/gugu.html">鼓鼓小超人</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/activity"><img src="/assets/web/menu03_off.gif" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="/assets/web/menu04_off.gif" /></a>
+          <ul class="navCategory menu hidden" style="padding-left:2903px">
+            <li>&nbsp;</li>
+            <li>
+              <a href="/widget/login" class="menu-dq">百奇小精灵</a>
+            </li>
+            <li><a href="/game/download.html">下载中心</a></li>
+            <li><a href="/game/game_lobby.html" class="menu-dq">游戏大厅</a></li>
+            <li><a href="/game/game.html">儿童游戏馆 </a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/jobs/index.html"><img src="/assets/web/menu05_off.gif" /></a>
+          <ul class="navCategory menu hidden" style="padding-left:2835px">
+            <li>&nbsp;</li>
+            <li>
+              <a href="/jobs/job.html" class="menu-dq"> 招聘岗位</a>
+            </li>
+            <li>
+              <a href="/jobs/mvp.html" class="menu-dq"> 格力高员工演讲</a>
+            </li>
+            <li>
+              <a href="/jobs/zenjin.html" class="menu-dq"> 员工介绍</a>
+            </li>
+            <li>
+              <a href="/jobs/jinsai.html" class="menu-dq"> 人才培养</a>
+            </li>
+            <li>
+              <a href="/jobs/qa.html" class="menu-dq"> Q&A</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/company/index.html"><img src="/assets/web/menu06_off.gif" /></a>
+          <ul class="navCategory menu hidden" style="padding-left:2832px">
+            <li>&nbsp;</li>
+            <li>
+              <a href="/company/index.html" class="menu-dq">格力高概要</a>
+            </li>
+            <li>
+              <a href="/company/index.html#link3" class="menu-dq"> 理念</a>
+            </li>
+            <li>
+              <a href="/company/index.html#link4" class="menu-dq"> 事业</a>
+            </li>
+            <li>
+              <a href="/company/history.html" class="menu-dq"> 历史</a>
+            </li>
+            <li>
+              <a href="/company/security.html" class="menu-dq"> 安全安心</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<%= render :partial =>'tp/login' %>

@@ -1,0 +1,48 @@
+<script type="text/html" id="fancybox_login_tp">
+  <div class="login_box">
+    <p><img src="/assets/web/login_ti.gif"></p>
+    <div class="login_list">
+      <%= form_tag dologin_path, :method =>:post, :id=>'member_login' do %>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody><tr>
+          <td width="18%"><span>用户名：</span></td>
+          <td width="40%"><input name="login" type="text" class="login_input" /></td>
+          <td width="42%" rowspan="2" valign="top">
+          <input type="submit" class="submit_icon" id="member_logined_btn" value="" />
+          </td>
+        </tr>
+        <tr>
+          <td><span>密&nbsp;&nbsp;&nbsp;码：</span></td>
+          <td><input name="password" type="password" class="login_input" /></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td colspan="2"><div class="login_text">
+            <p class="login_checkbox">
+              <input name="remember_me" type="checkbox" value="1" />
+            </p>
+            <p class="">记住会员ID</p>
+            <p class="login_text2"><a href="javascript:;" id="forget_password">忘记密码</a> | <a href="<%= signup_path %>">会员注册</a></p>
+          </div></td>
+        </tr>
+        </tbody>
+      </table>
+      <% end %>
+    </div>
+    <p class="login_timg"><img src="/assets/web/login_line.gif"></p>
+    <ul>
+      <li><a href="/auth/qq_connect" target="_blank"><img src="/assets/web/login_img1.jpg" class="img_opacity"></a></li>
+      <li><a href="/auth/weibo" target="_blank"><img src="/assets/web/login_img2.jpg" class="img_opacity"></a></li>
+      <li><a href="/auth/xiaonei" target="_blank"><img src="/assets/web/login_img3.jpg" class="img_opacity"></a></li>
+    </ul>
+  </div>
+
+
+</script>
+
+<script type="text/html" id="forget_password_tp">
+  <div class="forget_pwd">
+      <span>输入您的Email地址:</span><input type="text" name="email" /> <button id="forget_password_btn" class="p_hand">提交</button>
+      <div id="fpb_tip"></div>
+  </div>
+</script>

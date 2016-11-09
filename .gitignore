@@ -1,0 +1,15 @@
+.idea/
+.rvmrc
+log/
+config/database.yml
+test/
+/public/*.*
+/public/system/
+/public/assets/
+/public/flv
+!public/js
+tmp/
+upload
+uploads
+*.swp
+.DS_Store

@@ -1,0 +1,65 @@
+<div id="content" class="span10">
+
+  <div class="row-fluid sortable ui-sortable">
+    <div class="box span12">
+      <%= form_tag admin_addawardcsv_path, :method => :post, :multipart =>true, :target=>'award_csv', :id=>'award_csv_ajax' do %>
+        <input type="hidden" id="ca_id" name="campaign_id" value="<%= @cam.id %>" />
+          <div class="box-header well" data-original-title="">
+            <h2><i class="icon-edit"></i>通过上传CSV文件添加</h2>
+            <div class="box-icon" >
+              <a href="javascript:void(0);" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+            </div>
+          </div>
+          <div class="box-content" style="margin-top:30px;padding-left:30px">
+            <div class="row-fluid">
+              <div class="span10">
+                <label class="span4" style="width: 25%;">当前活动名称: 
+                  <span><%= @cam.title %></span>
+                </label>
+                <label class="span6" style="width: 43%;">选择上传的CSV文件: <input type="file" id="ca_file" name="csv_file" /></label>
+                <button type="submit" class="btn btn-primary">上传</button>
+              </div>
+
+              <br class="clear"/>
+
+              <p class="TextArea" style="color: #999999; line-height: 20px; padding: 0 10px 0 0; width: 800px;">
+              文件格式说明：上传文件必须是CSV文档，若是excel请转化为CSV格式再上传，<br/>
+              每条数据分为两个列，第一列为用户名，第二列为手机号码, 两列之间用半角逗号（,）隔开，如下例子：
+              <br>
+              <a target="_blank" href="/example/campaign_results.csv"> CSV例子下载</a>
+              </p>
+
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
+
+</div>
+<iframe src="#" frameborder="0" id="award_csv" name="award_csv" style="width:0;height:0;border:0 solid #fff;"></iframe>
+
+<script type="text/javascript">
+
+  function campagin_csv(){
+      if(arguments.length > 0 && arguments[0] === 1) {
+          alert('该活动已经上传过获奖名单文件!');
+      } else if(arguments.length > 0 && arguments[0] === 2){
+          alert('该活动还没有结束!');
+      } else {
+          alert('添加成功!');
+      }
+      $('#ca_file').val('');
+  }
+
+  $(function (){
+      $('#award_csv_ajax').submit(function (){
+          var csvfile     = $('#ca_file');
+          if (csvfile.val() === '') {
+              alert('请选择上传的CSV格式的文件');
+              return false;
+          }
+          return true;
+      });
+  });
+</script>

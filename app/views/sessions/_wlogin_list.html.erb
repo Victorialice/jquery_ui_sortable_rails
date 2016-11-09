@@ -1,0 +1,49 @@
+<div class="wlogin_redbox">
+  <p><img src="/assets/web/widget/login_ti.gif" /></p>
+  <div class="wlogin_list">
+    <%= form_tag widgetlogin_path, :method => :post do %>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td width="22%"><span>用户名：</span></td>
+          <td width="48%" align="right">
+            <input name="name" type="text" class="login_input" />
+          </td>
+          <td width="30%" rowspan="2" valign="top" style="padding-left:7px;">
+            <input value="" type="submit"  class="login_icon" style="cursor: pointer;" />
+          </td>
+        </tr>
+        <tr>
+          <td><span>密&nbsp;&nbsp;&nbsp;码：</span></td>
+          <td align="right">
+            <input name="password" type="password" class="login_input" />
+          </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td colspan="2"><div class="wlogin_c1">
+              <p>
+              <input name="captcha" type="text" class="wlogin_c1input" />
+              </p>
+              <p><a href="javascript:;"><%= captcha_tag :id =>'captcha_img_src' %></a></p>
+              <p class="login_text2" style="padding: 5px 0 0 0;"><a href="javascript:;" id="make_new_captcha">点击刷新</a></p>
+          </div></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td colspan="2"><div class="login_text" style="padding-bottom:10px; float:left;">
+              <p class="login_checkbox">
+              <input name="remember_me" type="checkbox" value="1" />
+              </p>
+              <p>记住会员ID</p>
+              <p class="login_text2"><a href="#">忘记密码</a> <a href="<%= signup_path %>">会员注册</a></p>
+          </div></td>
+        </tr>
+        <tr>
+          <td colspan="3"><p style="float:left;">使用其它账号登录：
+            <div class="bshare-custom" style="float:left; padding:0;"> <a class=bshare-sinaminiblog title=分享到新浪微博 href="javascript:void(0);"></a><a class=bshare-kaixin001 title=分享到开心网 href="javascript:void(0);"></a><a class=bshare-renren title=分享到人人网 buttonIndex="0"></a></div>
+            </p></td>
+          </tr>
+        </table>
+      <% end %>
+    </div> <!--wlogin_list -->
+  </div>

@@ -1,0 +1,377 @@
+<%= content_for :header_css do %>
+    <link href="/js/select2/select2.css" media="all" rel="stylesheet" type="text/css" />
+<% end %>
+
+
+<div class="mypage_content">
+<div class="mypage_bg1">
+<div class="mypage_bg2">
+<div class="mypage_conlist">
+<div class="mypage_title">
+  <div class="mypage_tiL">
+    <p class="mypage_ti1">我的主页</p>
+    <p class="mypage_ti2">欢迎，<%= current_user.nickname %>!</p>
+  </div>
+  <div class="mypage_tiR"><a href="#" class="quit">》退出</a></div>
+</div>
+<%= form_tag updateuser_path(current_user.id) do %>
+    <div class="mypage_list" style="height: auto;">
+        <p class="mypage_topimg"><img src="/assets/web/topimg.png"></p>
+        <div class="mypage2_listbg">
+            <p class="mypage2_ti"><img src="/assets/web/mypage_title.gif"></p>
+            <input name="_method" type="hidden" value="put" />
+            <div class="qtable">
+            <table width="611">
+            <tbody>
+            <tr>
+              <td width="46%" class=cell-question><p class="signup_textL">
+                <label for="name">姓名</label>
+              </p>
+                <p><img src="/assets/web/signup/icon.gif"></p></td>
+              <td width="54%" class=cell-input><p style="float:left;">
+                <input name="user[name]" type="text" class="text_field" value="<%= current_user.name %>" data-required="true" data-error-message="请输入您的姓名">
+              </p>
+                <p class="signup_red">※请填写真实姓名</p></td>
+            </tr>
+            <tr>
+              <td class="cell-question">
+                <p class="signup_textL">昵称</p>
+                <p><img src="/assets/web/signup/icon.gif"></p>
+              </td>
+              <td class="cell-input"><input name="user[nickname]" value="<%= current_user.nickname %>" type="text" class="text_field" data-required="true" data-error-message="请输入您的昵称"></td>
+            </tr>
+            <tr>
+              <td class="cell-question"><label for="email">
+                <p class="signup_textL">电子邮箱（会员用户名）</p>
+                <p><img src="/assets/web/signup/icon.gif"></p>
+              </label></td>
+              <td class="cell-input"><input id="users_email1" value="<%= current_user.login %>" type="text" class="text_field2" readonly="readonly" data-required="true" data-type="email" data-required-message="邮箱地址不能为空" data-type-email-message="请输入正确的邮箱地址"></td>
+            </tr>
+            <tr>
+              <td class="cell-question"><label for="email">
+                <p class="signup_textL">电子邮箱确认</p>
+                <p><img src="/assets/web/signup/icon.gif"></p>
+              </label></td>
+              <td class="cell-input">
+                <div><input value="<%= current_user.login %>" type="text" class="text_field2" readonly="readonly" data-equalto="#users_email1" data-required="true" data-required-message="确认邮箱地址不能为空"  data-equalto-message="请输入相同的邮箱"></div>
+                <span>请再输入一次您的邮箱！</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="cell-question"><p class="signup_textL">
+                <label for="password">密码</label>
+              </p>
+                <p><img src="/assets/web/signup/icon.gif"></p>
+                <p class="clear"></p>
+                <div class="attention">6位以上的文字 </div></td>
+              <td class="cell-input"><input type="password" value="************" readonly="readonly" class="text_field" id="users_pwd1" data-required="true" data-minlength="6" data-required-message="密码不能为空" data-minlength-message="密码最少6位以上"></td>
+            </tr>
+            <tr>
+              <td class="cell-question"><label for="password">
+                <p class="signup_textL">密码确认</p>
+                <p><img src="/assets/web/signup/icon.gif"></p>
+              </label></td>
+              <td class="cell-input">
+                <div><input value="************" readonly="readonly" type="password" class="text_field" data-equalto="#users_pwd1" data-required="true" data-required-message="确认密码不能为空" data-equalto-message="请输入相同的确认密码"></div>
+                <span>请再输入一次您的密码！</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="cell-question"><label for="birthday2">
+                <p class="signup_textL">出生年月</p>
+                <p><img src="/assets/web/signup/icon.gif"></p>
+              </label></td>
+              <td class="cell-input">
+                <input id="user_birthday2" class="text_field Wdate" value="<%= current_user.birthday %>" type="text" name="user[birthday]" data-required="true" data-error-message="请选择您的出生年月" onFocus="WdatePicker({isShowClear:false,readOnly:true})"></td>
+            </tr>
+            <tr>
+              <td class="cell-question"><p class="signup_textL">性别</p>
+                <p><img src="/assets/web/signup/icon.gif"></p></td>
+              <td class="cell-input"><label for="select"></label>
+                <select name="user[gender]" class="signup_xlk">
+                  <option value="1" <%= current_user.gender? ? 'selected' : nil %>>男</option>
+                  <option value="0" <%= current_user.gender? ? nil : 'selected' %>>女</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td class="cell-question"><label for="address2">
+                <p class="signup_textL">所在地区</p>
+                <p><img src="/assets/web/signup/icon.gif"></p>
+              </label></td>
+              <td class="cell-input">
+                <select id="user_address2" name="user[address2]" data-oid="<%= current_user.address2 %>" style="width: 165px;">
+                  <OPTION></OPTION>
+                  <OPTION value="10000">北京市</OPTION>
+                  <OPTION value="10001">上海市</OPTION>
+                  <OPTION value="10002">天津市</OPTION>
+                  <OPTION value="10003">重庆市</OPTION>
+                  <OPTION value="10004">河北省　　石家庄市</OPTION>
+                  <OPTION value="10005">河北省　　廊坊市</OPTION>
+                  <OPTION value="10006">河北省　　保定市</OPTION>
+                  <OPTION value="10007">河北省　　唐山市</OPTION>
+                  <OPTION value="10008">河北省　　秦皇岛市</OPTION>
+                  <OPTION value="10009">山西省　　太原市</OPTION>
+                  <OPTION value="10010">山西省　　运城市</OPTION>
+                  <OPTION value="10011">山西省　　大同市</OPTION>
+                  <OPTION value="10012">山西省　　临汾市</OPTION>
+                  <OPTION value="10013">内蒙古　　呼和浩特市</OPTION>
+                  <OPTION value="10014">内蒙古　　赤峰市</OPTION>
+                  <OPTION value="10015">内蒙古　　包头市</OPTION>
+                  <OPTION value="10016">辽宁省　　沈阳市</OPTION>
+                  <OPTION value="10017">辽宁省　　大连市</OPTION>
+                  <OPTION value="10018">辽宁省　　鞍山市</OPTION>
+                  <OPTION value="10019">辽宁省　　营口市</OPTION>
+                  <OPTION value="10020">辽宁省　　抚顺市</OPTION>
+                  <OPTION value="10021">辽宁省　　锦州市</OPTION>
+                  <OPTION value="10022">辽宁省　　丹东市</OPTION>
+                  <OPTION value="10023">辽宁省　　葫芦岛市</OPTION>
+                  <OPTION value="10024">辽宁省　　本溪市</OPTION>
+                  <OPTION value="10025">辽宁省　　辽阳市</OPTION>
+                  <OPTION value="10026">辽宁省　　铁岭市</OPTION>
+                  <OPTION value="10027">吉林省　　长春市</OPTION>
+                  <OPTION value="10028">吉林省　　吉林市</OPTION>
+                  <OPTION value="10029">吉林省　　辽源市</OPTION>
+                  <OPTION value="10030">吉林省　　通化市</OPTION>
+                  <OPTION value="10031">黑龙江省　哈尔滨市</OPTION>
+                  <OPTION value="10032">黑龙江省　伊春市</OPTION>
+                  <OPTION value="10033">黑龙江省　绥化市</OPTION>
+                  <OPTION value="10034">黑龙江省　大庆市</OPTION>
+                  <OPTION value="10035">黑龙江省　齐齐哈尔市</OPTION>
+                  <OPTION value="10036">黑龙江省 牡丹江市</OPTION>
+                  <OPTION value="10037">黑龙江省 佳木斯市</OPTION>
+                  <OPTION value="10038">江苏省　　南京市</OPTION>
+                  <OPTION value="10039">江苏省　　苏州市</OPTION>
+                  <OPTION value="10040">江苏省　　无锡市</OPTION>
+                  <OPTION value="10041">江苏省　　常州市</OPTION>
+                  <OPTION value="10042">江苏省　　昆山市</OPTION>
+                  <OPTION value="10043">江苏省　　常熟市</OPTION>
+                  <OPTION value="10044">江苏省　　扬州市</OPTION>
+                  <OPTION value="10045">江苏省　　南通市</OPTION>
+                  <OPTION value="10046">江苏省　　镇江市</OPTION>
+                  <OPTION value="10047">江苏省　　徐州市</OPTION>
+                  <OPTION value="10048">江苏省　　连云港市</OPTION>
+                  <OPTION value="10049">江苏省　　盐城市</OPTION>
+                  <OPTION value="10050">江苏省　　张家港市</OPTION>
+                  <OPTION value="10051">浙江省　　杭州市</OPTION>
+                  <OPTION value="10052">浙江省　　宁波市</OPTION>
+                  <OPTION value="10053">浙江省　　温州市</OPTION>
+                  <OPTION value="10054">浙江省　　绍兴市</OPTION>
+                  <OPTION value="10055">浙江省　　金华市</OPTION>
+                  <OPTION value="10056">浙江省　　嘉兴市</OPTION>
+                  <OPTION value="10057">浙江省　　台州市</OPTION>
+                  <OPTION value="10058">浙江省　　湖州市</OPTION>
+                  <OPTION value="10059">浙江省　　丽水市</OPTION>
+                  <OPTION value="10060">浙江省　　舟山市</OPTION>
+                  <OPTION value="10061">浙江省　　衢州市</OPTION>
+                  <OPTION value="10062">安徽省　　合肥市</OPTION>
+                  <OPTION value="10063">安徽省　　芜湖市</OPTION>
+                  <OPTION value="10064">安徽省　　安庆市</OPTION>
+                  <OPTION value="10065">安徽省　　马鞍山市</OPTION>
+                  <OPTION value="10066">安徽省　　蚌埠市</OPTION>
+                  <OPTION value="10067">安徽省　　阜阳市</OPTION>
+                  <OPTION value="10068">安徽省　　铜陵市</OPTION>
+                  <OPTION value="10069">安徽省　　滁州市</OPTION>
+                  <OPTION value="10070">安徽省　　黄山市</OPTION>
+                  <OPTION value="10071">安徽省　　淮南市</OPTION>
+                  <OPTION value="10072">安徽省　　六安市</OPTION>
+                  <OPTION value="10073">安徽省　　巢湖市</OPTION>
+                  <OPTION value="10074">安徽省　　宣城市</OPTION>
+                  <OPTION value="10075">安徽省　　池州市</OPTION>
+                  <OPTION value="10076">福建省　　福州市</OPTION>
+                  <OPTION value="10077">福建省　　厦门市</OPTION>
+                  <OPTION value="10078">福建省　　泉州市</OPTION>
+                  <OPTION value="10079">福建省　　漳州市</OPTION>
+                  <OPTION value="10080">福建省　　莆田市</OPTION>
+                  <OPTION value="10081">福建省　　三明市</OPTION>
+                  <OPTION value="10082">福建省　　南平市</OPTION>
+                  <OPTION value="10083">福建省　　宁德市</OPTION>
+                  <OPTION value="10084">福建省　　龙岩市</OPTION>
+                  <OPTION value="10085">江西省　　南昌市</OPTION>
+                  <OPTION value="10086">江西省　　九江市</OPTION>
+                  <OPTION value="10087">山东省　　济南市</OPTION>
+                  <OPTION value="10088">山东省　　青岛市</OPTION>
+                  <OPTION value="10089">山东省　　烟台市</OPTION>
+                  <OPTION value="10090">山东省　　潍坊市</OPTION>
+                  <OPTION value="10091">山东省　　威海市</OPTION>
+                  <OPTION value="10092">山东省　　淄博市</OPTION>
+                  <OPTION value="10093">山东省　　临沂市</OPTION>
+                  <OPTION value="10094">山东省　　济宁市</OPTION>
+                  <OPTION value="10095">山东省　　东营市</OPTION>
+                  <OPTION value="10096">山东省　　泰安市</OPTION>
+                  <OPTION value="10097">山东省　　日照市</OPTION>
+                  <OPTION value="10098">山东省　　德州市</OPTION>
+                  <OPTION value="10099">河南省　　郑州市</OPTION>
+                  <OPTION value="10100">河南省　　洛阳市</OPTION>
+                  <OPTION value="10101">河南省　　开封市</OPTION>
+                  <OPTION value="10102">湖北省　　武汉市</OPTION>
+                  <OPTION value="10103">湖北省　　宜昌市</OPTION>
+                  <OPTION value="10104">湖北省　　黄石市</OPTION>
+                  <OPTION value="10105">湖北省　　襄樊市</OPTION>
+                  <OPTION value="10106">湖北省　　十堰市</OPTION>
+                  <OPTION value="10107">湖北省　　荆州市</OPTION>
+                  <OPTION value="10108">湖北省　　荆门市</OPTION>
+                  <OPTION value="10109">湖北省　　孝感市</OPTION>
+                  <OPTION value="10110">湖北省　　鄂州市</OPTION>
+                  <OPTION value="10111">湖南省　　长沙市</OPTION>
+                  <OPTION value="10112">湖南省　　株洲市</OPTION>
+                  <OPTION value="10113">湖南省　　湘潭市</OPTION>
+                  <OPTION value="10114">湖南省　　衡阳市</OPTION>
+                  <OPTION value="10115">湖南省　　岳阳市</OPTION>
+                  <OPTION value="10116">湖南省　　常德市</OPTION>
+                  <OPTION value="10117">湖南省　　益阳市</OPTION>
+                  <OPTION value="10118">湖南省　　郴州市</OPTION>
+                  <OPTION value="10119">湖南省　　邵阳市</OPTION>
+                  <OPTION value="10120">湖南省　　怀化市</OPTION>
+                  <OPTION value="10121">湖南省　　娄底市</OPTION>
+                  <OPTION value="10122">湖南省　　永州市</OPTION>
+                  <OPTION value="10123">湖南省　　张家界市</OPTION>
+                  <OPTION value="10124">广东省　　广州市</OPTION>
+                  <OPTION value="10125">广东省　　深圳市</OPTION>
+                  <OPTION value="10126">广东省　　惠州市</OPTION>
+                  <OPTION value="10127">广东省　　汕头市</OPTION>
+                  <OPTION value="10128">广东省　　珠海市</OPTION>
+                  <OPTION value="10129">广东省　　佛山市</OPTION>
+                  <OPTION value="10130">广东省　　中山市</OPTION>
+                  <OPTION value="10131">广东省　　东莞市</OPTION>
+                  <OPTION value="10132">广东省　　韶关市</OPTION>
+                  <OPTION value="10133">广东省　　江门市</OPTION>
+                  <OPTION value="10134">广东省　　湛江市</OPTION>
+                  <OPTION value="10135">广东省　　肇庆市</OPTION>
+                  <OPTION value="10136">广东省　　清远市</OPTION>
+                  <OPTION value="10137">广东省　　潮州市</OPTION>
+                  <OPTION value="10138">广东省　　河源市</OPTION>
+                  <OPTION value="10139">广东省　　揭阳市</OPTION>
+                  <OPTION value="10140">广东省　　茂名市</OPTION>
+                  <OPTION value="10141">广东省　　汕尾市</OPTION>
+                  <OPTION value="10142">广东省　　顺德市</OPTION>
+                  <OPTION value="10143">广西　　　南宁市</OPTION>
+                  <OPTION value="10144">广西　　　桂林市</OPTION>
+                  <OPTION value="10145">广西　　　柳州市</OPTION>
+                  <OPTION value="10146">广西　　　北海市</OPTION>
+                  <OPTION value="10147">海南省　　海口市</OPTION>
+                  <OPTION value="10148">海南省　　三亚市</OPTION>
+                  <OPTION value="10149">四川省　　成都市</OPTION>
+                  <OPTION value="10150">四川省　　绵阳市</OPTION>
+                  <OPTION value="10151">四川省　　乐山市</OPTION>
+                  <OPTION value="10152">四川省　　泸州市</OPTION>
+                  <OPTION value="10153">四川省　　德阳市</OPTION>
+                  <OPTION value="10154">四川省　　宜宾市</OPTION>
+                  <OPTION value="10155">四川省　　自贡市</OPTION>
+                  <OPTION value="10156">四川省　　内江市</OPTION>
+                  <OPTION value="10157">四川省　　攀枝花市</OPTION>
+                  <OPTION value="10158">贵州省　　贵阳市</OPTION>
+                  <OPTION value="10159">贵州省　　遵义市</OPTION>
+                  <OPTION value="10160">云南省　　昆明市</OPTION>
+                  <OPTION value="10161">云南省　　曲靖市</OPTION>
+                  <OPTION value="10162">云南省　　玉溪市</OPTION>
+                  <OPTION value="10163">云南省　　大理市</OPTION>
+                  <OPTION value="10164">云南省　　丽江市</OPTION>
+                  <OPTION value="10165">云南省　　蒙自市</OPTION>
+                  <OPTION value="10166">云南省　　开远市</OPTION>
+                  <OPTION value="10167">云南省　　个旧市</OPTION>
+                  <OPTION value="10168">云南省　　红河州</OPTION>
+                  <OPTION value="10169">西藏　　　拉萨市</OPTION>
+                  <OPTION value="10170">西藏　　　日喀则市</OPTION>
+                  <OPTION value="10171">陕西省　　西安市</OPTION>
+                  <OPTION value="10172">陕西省　　咸阳市</OPTION>
+                  <OPTION value="10173">陕西省　　宝鸡市</OPTION>
+                  <OPTION value="10174">陕西省　　铜川市</OPTION>
+                  <OPTION value="10175">陕西省　　延安市</OPTION>
+                  <OPTION value="10176">甘肃省　　兰州市</OPTION>
+                  <OPTION value="10177">甘肃省　　金昌市</OPTION>
+                  <OPTION value="10178">青海省　　西宁市</OPTION>
+                  <OPTION value="10179">宁夏　　　银川市</OPTION>
+                  <OPTION value="10180">新疆　　　乌鲁木齐市</OPTION>
+                  <OPTION value="10181">新疆　　　克拉玛依市</OPTION>
+                  <OPTION value="10182">新疆　　　喀什地区市</OPTION>
+                  <OPTION value="10183">港澳台　　香港</OPTION>
+                  <OPTION value="10184">港澳台　　澳门</OPTION>
+                  <OPTION value="10185">港澳台　　台湾</OPTION>
+                </SELECT>
+              </td>
+            </tr>
+            <tr>
+              <td class=cell-question><label for=like_snacks>
+                <p class="signup_textL">职业</p>
+                <p><img src="/assets/web/signup/icon.gif"></p>
+              </label></td>
+              <td class=cell-input>
+                <select name="user[job]" class="signup_xlk">
+                  <% %w{学生 公司职员 个体经营 农业 公务员 家庭主妇 其他}.each do |job| %>
+                    <option value="<%= job %>" <%= 'selected' if job == current_user.job %>><%= job %></option>
+                  <% end %>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" class=cell-question><ul>
+                <li>是否可以向你发送介绍格力高新产品，各种活动信息等内容的电子报？（选择） </li>
+                <li><img src="/assets/web/signup/icon.gif"></li>
+                <li>是</li>
+                <li style="padding-top:0;">
+                  <input name="user[email_agreement]" type="radio" value="1" data-required="true" data-error-message="请选择是否需要" <%= current_user.email_agreement? ? 'checked' : nil %>>
+                </li>
+                <li>&nbsp;</li>
+                <li>否</li>
+                <li style="padding-top:0;">
+                  <input name="user[email_agreement]" type="radio" value="0" <%= current_user.email_agreement? ? nil : 'checked' %>>
+                </li>
+              </ul></td>
+            </tr>
+            <tr>
+              <td colspan="2" class=cell-question><p class="signup_t2">※ 参加抽奖活动时，需要以下信息。建议填写。</p></td>
+            </tr>
+            <tr>
+              <td class=cell-question><p class="signup_textL"> 邮政编码<br/>
+                住址 </p>
+                <p><img src="/assets/web/signup/icon2.gif"></p></td>
+              <td class=cell-input style="padding:11px 0 11px 15px;"><input name="user[postcode]" value="<%= current_user.postcode %>" type="text" class="text_field3" >
+                <br/>
+                <input name="user[detail_address]" type="text" class="text_field2" value="<%= current_user.detail_address %>" ></td>
+            </tr>
+            <tr>
+              <td class=cell-question><p class="signup_textL">手机号码</p>
+                <p><img src="/assets/web/signup/icon2.gif"></p></td>
+              <td class=cell-input><input name="user[telphone]" type="text" class="text_field" value="<%= current_user.telphone %>"></td>
+            </tr>
+            </tbody>
+            </table>
+            </div>
+
+
+        </div>
+        <p><img src="/assets/web/botimg.png"></p>
+    </div>
+
+    <div class="signup_bot" style="width: 960px;">
+      <p class="signup_icon">
+      <a href="<%= request.env["HTTP_REFERER"]%>" id="back_user_btn"><img src="/assets/web/mypage2_icon_back.gif"></a>
+      <a href="javascript:;" id="add_user_btn"><img src="/assets/web/mypage2_icon_off.gif"></a>
+      </p>
+    </div>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript" src="/js/parsley/parsley.min.js"></script>
+<script type="text/javascript" src="/js/select2/select2.min.js"></script>
+<script type="text/javascript" src="/js/my97DatePicker/WdatePicker.js"></script>
+
+<script type="text/javascript">
+    $(function (){
+        var addr = $('#user_address2'),
+            oid  = addr.attr('data-oid');
+        addr.find('option[value="'+oid+'"]').attr('selected', 'selected');
+
+        $('#user_address2').select2();
+
+        $('#add_user_btn').click(function (){
+            $('form').parsley('validate');
+            $('form').submit();
+            return false;
+        });
+    });
+</script>

@@ -1,0 +1,385 @@
+<!--
+<script type="text/javascript">
+  var dsNews = new Spry.Data.XMLDataSet("/data/news.xml", "news/news");
+</script>
+-->
+<script>
+  function correctPNG() {
+    for (var i = 0; i < document.images.length; i++) {
+      var img = document.images[i];
+      var imgName = img.src.toUpperCase();
+      if (imgName.substring(imgName.length - 3, imgName.length) == "PNG") {
+        var imgID = (img.id) ? "id='" + img.id + "' " : "";
+        var imgClass = (img.className) ? "class='" + img.className + "' " : "";
+        var imgTitle = (img.title) ? "title='" + img.title + "' " : "title='" + img.alt + "' ";
+        var imgStyle = "display:inline-block;" + img.style.cssText;
+        if (img.align == "left") imgStyle = "float:left;" + imgStyle;
+        if (img.align == "right") imgStyle = "float:right;" + imgStyle;
+        if (img.parentElement.href) imgStyle = "cursor:hand;" + imgStyle;
+        var strNewHTML = "<span " + imgID + imgClass + imgTitle + "style=\"" + "width:" + img.width + "px; height:" + img.height + "px;" + imgStyle + ";"
+          + "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader" + "(src='" + img.src + "', sizingMethod='scale');\"></span>";
+        img.outerHTML = strNewHTML;
+        i = i - 1;
+      }
+    };
+  }
+  if (window.attachEvent) {
+    window.attachEvent("onload", correctPNG);
+  }
+</script>
+
+<div class="in_banner" style="overflow:hidden">
+  <div id="slideInner">
+    <div id="photoContainer" style="overflow: hidden" class="slide_container">
+      <div id="in_arrowL" class="nav_prev"><a href="#"><img src="/assets/web/left_arrow.png" /></a></div>
+      <div id="in_arrowR" class="nav_next"><a href="#"><img src="/assets/web/right_arrow.png" /></a></div>
+
+      <ul id="photoSlide" class="slide_box cf">
+        <% Topimage.by_position.each do |topimage| %>
+          <% if topimage.target_blank? %> 
+            <li><%= link_to (image_tag topimage.image.url), topimage.linkurl, target: "_blank"  %></li> 
+          <% else %> 
+            <li><%= link_to (image_tag topimage.image.url), topimage.linkurl %></li> 
+          <% end %>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+
+</div>
+<div class="in_contentbg">
+  <div class="in_content">
+    <div class="in_c1">
+      <p class="mdp"><img src="/assets/web/in_title1.gif" /></p>
+      <div class="in_c1zbg" id="scrollbar">
+        <div class="in_c1text">
+        <ul>
+          <% @news.each do |new| %>
+            <% if new.link.blank? %>
+            <li><span><%= new.date.strftime("%Y年%m月%d日") %></span> <%= new.title %></li>
+          <% else %>
+            <li>
+            <span><%= new.date.strftime("%Y年%m月%d日") %></span> 
+            <a href="<%= new.link %>"><%= new.title %></a>
+            </li>
+          <% end %>
+          <% end %>
+          <li><span>2013年04月01日</span> <a href="http://www.glico.com.cn/activity">百力滋新广告全国投放！</a></li>
+          <li><span>2013年04月01日</span> <a href="http://pretz.glico.com.cn/">百力滋活动网站开始啦，iPad mini等你拿！</a></li>
+          <li><span>2013年03月30日</span> <a href="http://www.glico.com.cn/">2013年4月1日格力高官网全新改版啦-！</a></li>
+          <li><span>2013年03月20日</span> <a href="http://www.glico.com.cn/pretz/index.html">百力滋新口味：海苔味、奶油香草味新上市！</a></li>
+          <li><span>2012年10月16日</span> 巧克力系列全新登场！</li>
+        
+          <li><span>2012年10月16日</span> 当月壁纸</li>
+        
+          <li><span>2012年10月16日</span> 百奇新广告投放啦～！</a></li>
+        
+          <li><span>2012年10月16日</span> 百奇新口味上市了！</li>
+        
+          <li><span>2012年03月16日</span> 上传了新百醇广告啦！！！</li>
+        
+          <li><span>2012年03月16日</span> 百醇网页更新啦！！</li>
+        
+          <li><span>2012年03月09日</span> 招聘信息全面更新！</li>
+        
+          <li><span>2012年01月19日</span> 格力高美味直送 中奖名单发布了！</li>
+        
+          <li><span>2012年01月12日</span> 星奇网页更新啦！</li>
+        
+          <li><span>2011年12月26日</span> 格力高官方授权淘宝商城专营店上线啦~~</li>
+        
+          <li><span>2011年12月23日</span> 奶香四溢的英式曲奇‘小布蕾’新上市！！</li>
+        
+          <li><span>2011年12月22日</span> 蛋筒型巧克力‘泡丽可’ 美味升级啦！</li>
+        
+          <li><span>2011年12月21日</span> 慕纱巧克力 全新上市改良！</li>
+        
+          <li><span>2011年12月21日</span> 圣诞大礼物 中奖名单发布了！</li>
+        
+          <li><span>2011年12月09日</span> 圣诞大礼物抽奖活动！</li>
+        
+          <li><span>2011年11月22日</span> 新产品赠送活动 中奖名单发布了！</li>
+        
+          <li><span>2011年11月03日</span> 可爱新产品赠送活动火爆进行中！</li>
+        
+          <li><span>2011年10月12日</span> “格力高美味直送”开始订购啦！！</li>
+        
+          <li><span>2011年10月12日</span> 玩炫舞，兑好礼！</li>
+        
+          <li><span>2011年10月08日</span> 限量赠送小玩具活动又开始了！</li>
+        
+          <li><span>2011年09月06日</span> 曲奇小超人的欢乐伙伴们！</li>
+        
+          <li><span>2011年07月26日</span> 星奇赠送活动 中奖名单公布了！</li>
+        
+          <li><span>2011年07月06日</span> 升级星奇，新上市！</li>
+        
+          <li><span>2011年06月29日</span> 川川的美味挑战哟~~♪</li>
+        
+          <li><span>2011年06月08日</span> 限量赠送！旋动格力高游乐园3D立体拼图</li>
+        
+          <li><span>2011年05月12日</span> 新品大赠送！！格力高​会员更有惊喜特典！！</li>
+        
+          <li><span>2011年05月05日</span> 神户时尚盛宴的美女们！！</li>
+        
+          <li><span>2011年04月14日</span> 奇蒂新口味新上市！！！</li>
+        
+          <li><span>2011年04月11日</span> 桌面宠物“百奇小精灵”火热出炉了！</li>
+        
+          <li><span>2011年04月07日</span> 格力高乐酷天官方专卖店开张啦~！</li>
+        
+          <li><span>2011年03月28日</span> 巧酥酥新口味上市了！</li>
+        
+          <li><span>2011年01月14日</span> 春节B2B团购礼盒 火热进行中！</li>
+        
+          <li><span>2010年12月27日</span> 中奖名单公布了！</li>
+        
+          <li><span>2010年12月17日</span> 格力高会员专属活动汇报！</li>
+        
+          <li><span>2010年10月01日</span> 百奇节告白活动开始了！</li>
+        
+          <li><span>2010年08月20日</span> 新产品隆重上市啦！</li>
+        
+          <li><span>2010年07月01日</span> 格力高卡通剧场欢乐上映！！</li>
+        
+          <li><span>2010年03月04日</span> ICREO（爱力奥）奶粉邀请专业日本营养师来讲课！</li>
+        
+          <li><span>2010年01月21日</span> 爱力奥（ICREO）网站开设了！</li>
+        
+          <li><span>2009年12月12日</span> [格力高精选巧克力礼包]免费赠送大行动！</li>
+        
+          <li><span>2009年11月12日</span> 慕思百奇免费赠送大行动！</li>
+        
+          <li><span>2009年10月12日</span> 泡丽可免费赠送大行动！</li>
+        
+          <li><span>2009年09月01日</span> 百奇节视频大选秀活动开始了！！</li>
+        
+          <li><span>2009年07月01日</span> 双层百力滋免费赠送大行动！！！</li>
+        
+          <li><span>2009年05月11日</span> Kittyland</li>
+        
+          <li><span>2009年05月11日</span> Pejoy</li>
+        
+          <li><span>2009年05月01日</span> 奇蒂新口味可爱登场了！</li>
+        
+          <li><span>2009年05月01日</span> Pejoy免费赠送大行动</li>
+        
+          <li><span>2009年05月01日</span> sinky星奇美味炫亮升级！</li>
+        
+          <li><span>2009年05月01日</span> 格力高NEW网站，「格力高乐园」开园了！</li>
+        
+          <li><span>2009年05月01日</span> 格力高乐园会员大招募！</li>
+        
+          <li><span>2009年02月03日</span> 新的奇蒂诞生了，更好吃更可爱了！</li>
+        </ul>
+  <!--      <ul spry:repeatchildren="dsNews">
+          <li><span>{date}</span> <a href={link}>{title}</a></li>
+        </ul> -->
+        </div>
+      </div>
+      <p><img src="/assets/web/in_boxbot.gif" /></p>
+    </div>
+    <div class="in_c2">
+      <p class="mdp"><img src="/assets/web/in_title2.gif" /></p>
+      <div class="in_c2bg">
+        <p class="in_c2Limg"><a href="<%= signup_path %>"><img src="/assets/web/in_img1.jpg" class="img_opacity" /></a></p>
+        <div class="in_c2Rimg">
+          <p><a href="/presentation"><img src="/assets/web/in_img2.jpg" class="img_opacity" /></a></p>
+          <div class="in_c2Rtext">
+            格力高会员独享！<br />
+            百力滋尝鲜新品  <br />
+            大赠送！
+            <p class="in_c2Rmore"><a href="/presentation">&gt;更多 ...</a></p>
+            <p class="in_c2Rmore"><a href="#" class="member_logined">&gt;马上会员登录</a></p>
+          </div>
+        </div>
+      </div>
+      <p><img src="/assets/web/in_c2bot.gif" /></p>
+      <ul>
+        <li style="padding-right:10px;">
+          <a href="http://zwxsp.tmall.com/view_page-246120895.htm?spm=a1z10.1.w832965368.4.in1aNc" target="_blank"><img src="/assets/web/in_img3.jpg" class="img_opacity" /></a>
+        </li>
+        <li>
+          <a href="/family/index.html" target="_blank"><img src="/assets/web/qinzi_banner.png" class="img_opacity" /></a>
+        </li>
+      </ul>
+    </div>
+    <div class="in_c3">
+      <p class="mdp"><img src="/assets/web/in_title3.gif" /></p>
+      <div class="in_c1zbg" style="padding-bottom: 26px">
+        <p class="in_c3yp" id="play_movie">
+          <a href="#" id="g_flv">
+            <img src="/assets/web/in_movie.jpg" />
+            <span id="play_arrow">
+              <img src="/assets/play.png" />
+            </span>
+          </a>
+        </p>
+        <div id="flv_addr" style="display: none;">
+          <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="720" height="405">
+            <param name="movie" value="/flv/video.swf" />
+            <param name="flashvars" value="width=720&amp;height=405&amp;play=&amp;stop=&amp;bg=&amp;flv=/flv/30s_add_sp.flv">
+            <param name="quality" value="high" />
+            <param name="wmode" value="opaque" />
+            <object type="application/x-shockwave-flash" data="/flv/video.swf" width="720" height="405" id="swfContain" style="visibility: inherit;">
+              <param name="menu" value="false">
+              <param name="wmode" value="transparent">
+              <param name="scale" value="noScale">
+              <param name="allowFullscreen" value="true">
+              <param name="allowScriptAccess" value="always">
+              <param name="bgcolor" value="#FFFFFF">
+              <param name="flashvars" value="width=720&amp;height=405&amp;play=&amp;stop=&amp;bg=&amp;flv=/flv/30s_add_sp.flv">
+            </object>
+          </object>
+        </div>
+        <p class="in_c3text">百力滋广告（陈柏霖／大家分享篇）<br />
+          ~根根乐分享，当然是朋友！PRETZ~</p>
+        <p class="in_c2Rmore" style="float:right; padding:4px 25px 0 0;"><a href="/activity">&gt;更多 ...</a></p>
+
+      </div>
+      <p><img src="/assets/web/in_boxbot.gif" /></p>
+
+    </div>
+
+  </div>
+</div>
+<div class="in_content2bg">
+  <div class="in_content2">
+    <p><img src="/assets/web/brand_ti.gif" /></p>
+    <ul class="in_brand" id="hjhj">
+      <p class="in_title"><img src="/assets/web/c_title1.gif" /></p>
+      <li>
+        <div class="brand1_list">
+          <p class="brand1_left"><a href="/pocky/index.html"><img src="/assets/web/brand_img1_off.jpg" /></a></p>
+          <p class="brand1_rtext"><a href="/pocky/index.html">百奇</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand1_list">
+          <p class="brand1_left"><a href="/moussepocky/index.html"><img src="/assets/web/brand_img2_off.jpg" /></a> </p>
+          <p class="brand1_rtext"><a href="/moussepocky/index.html">慕思百奇</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand1_list">
+          <p class="brand1_left"><a href="/lilipocky/index.html"><img src="/assets/web/brand_img3_off.jpg" /></a></p>
+          <p class="brand1_rtext"><a href="/lilipocky/index.html">粒粒百奇</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand1_list">
+          <p class="brand1_left"><a href="/crushpocky/index.html"><img src="/assets/web/brand_img4_off.jpg" /></a></p>
+          <p class="brand1_rtext"><a href="/crushpocky/index.html">扁桃仁脆百奇</a></p>
+        </div>
+      </li>
+    </ul>
+    <ul class="in_brand">
+      <p class="in_title"><img src="/assets/web/c_title2.gif" /></p>
+      <li>
+        <div class="brand1_list">
+          <p class="brand1_left"><a href="/pretz/index.html"><img src="/assets/web/brand_img5_off.jpg" /></a></p>
+          <p class="brand1_rtext"><a href="/pretz/index.html">百力滋</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand1_list">
+          <p class="brand1_left"><a href="/doublepretz/index.html"><img src="/assets/web/brand_img6_off.jpg" /></a></p>
+          <p class="brand1_rtext"><a href="/doublepretz/index.html">双层百力滋</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand1_list2">
+          <p class="in_title"><img src="/assets/web/c_title3.gif" /></p>
+          <p class="brand1_left"><a href="/pejoy/index.html"><img src="/assets/web/brand_img7_off.jpg" /></a></p>
+          <p class="brand1_rtext"><a href="/pejoy/index.html">百醇</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand1_list2">
+          <p class="in_title"><img src="/assets/web/c_title4.gif" /></p>
+          <p class="brand1_left"><a href="/caiyuan1/index.html"><img src="/assets/web/brand_img8_off.jpg" /></a></p>
+          <p class="brand1_rtext"><a href="/caiyuan1/index.html">菜园小饼</a></p>
+        </div>
+      </li>
+    </ul>
+    <ul class="in_brand">
+      <p class="in_title"><img src="/assets/web/c_title5.gif" /></p>
+      <li>
+        <div class="brand3_list">
+          <p class="brand1_left"><a href="/cake/index.html"><img src="/assets/web/brand_img9_off.jpg" /></a></p>
+          <p class="brand3_rtext"><a href="/cake/index.html">巧心柔</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand3_list" style="padding-top:48px;">
+          <p class="brand1_left"><a href="/cookie/index.html"><img src="/assets/web/brand_img10_off.jpg" /></a></p>
+          <p class="brand3_rtext"><a href="/cookie/index.html">巧酥酥</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand3_list" style="padding-top:30px;">
+          <p class="in_title"><img src="/assets/web/c_title6.gif" /></p>
+          <p class="brand1_left"><a href="/shortbread/index.html"><img src="/assets/web/brand_img11_off.jpg" /></a></p>
+          <p class="brand3_rtext"><a href="/shortbread/index.html">小布蕾</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand3_list" style="padding-top:30px;">
+          <p class="in_title"><img src="/assets/web/c_title7.gif" /></p>
+          <p class="brand1_left"><a href="/mousa/index.html"><img src="/assets/web/brand_img12_off.jpg" /></a> </p>
+          <p class="brand1_rtext"><a href="/mousa/index.html">慕纱</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand3_list">
+          <p class="brand1_left"><a href="/caplico/index.html"><img src="/assets/web/brand_img13_off.jpg" /></a></p>
+          <p class="brand1_rtext"><a href="/caplico/index.html">泡丽可</a></p>
+        </div>
+      </li>
+    </ul>
+    <ul class="in_brand" style="padding-right:0;">
+      <p class="in_title"><img src="/assets/web/c_title8.gif" /></p>
+      <li>
+        <div class="brand3_list">
+          <p class="brand1_left"><a href="/kittyland/index.html"><img src="/assets/web/brand_img14_off.jpg" /></a></p>
+          <p class="brand4_rtext"><a href="/kittyland/index.html">奇蒂</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand3_list">
+          <p class="brand1_left"><a href="/minikitty/index.html"><img src="/assets/web/brand_img15_off.jpg" /></a></p>
+          <p class="brand4_rtext"><a href="/minikitty/index.html">奇蒂森林奇遇</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand3_list">
+          <p class="brand1_left"><a href="/collon/index.html"><img src="/assets/web/brand_img16_off.jpg" /></a></p>
+          <p class="brand4_rtext"><a href="/collon/index.html">可珑</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand3_list">
+          <p class="brand1_left"><a href="/sinky/index.html"><img src="/assets/web/brand_img17_off.jpg" /></a></p>
+          <p class="brand4_rtext"><a href="/sinky/index.html">星奇</a></p>
+        </div>
+      </li>
+      <li>
+        <div class="brand3_list">
+          <p class="brand1_left"><a href="/gugu.html"><img src="/assets/web/brand_img18_off.jpg" /></a></p>
+          <p class="brand4_rtext"><a href="/gugu.html">鼓鼓小超人</a></p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<style type="text/css">
+  #scrollbar {position:relative;}
+  .ps-container .ps-scrollbar-y { background-color:#FF1493;}
+</style>
+<script type="text/javascript">
+   $("#scrollbar").height(254);
+   $(function() {
+       $('#scrollbar').perfectScrollbar();
+       smartRollover('.brand1_left img');
+   });
+</script>

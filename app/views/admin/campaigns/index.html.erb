@@ -1,0 +1,48 @@
+<div id="content" class="span10">
+  <div class="row-fluid sortable ui-sortable">
+    <div class="box span12" style="">
+      <div class="box-header well" data-original-title="">
+        <h2><i class="icon-user"></i>TOP所有滚动图片</h2>
+        <h2 style="margin-left: 100px;"><a href="<%= new_admin_campaign_path %>"><i class="icon-edit"></i>创建新的活动</a></h2>
+        <div class="box-icon">
+          <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+        </div>
+      </div>
+      <div class="box-content">
+        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
+          <table class="table table-striped table-bordered bootstrap-datatable datatable dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
+            <thead>
+            <tr role="row">
+              <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 45px;">ID</th>
+              <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 162px;">图片</th>
+              <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 162px;">标题</th>
+              <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 162px;">内容</th>
+              <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 87px;">开始时间</th>
+              <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 99px;">结束时间</th>
+              <th class="sorting" tabindex="0" rowspan="1" colspan="1" style="width: 160px;">操作</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% @campaigns.each do |cam| %>
+                <tr class="<%= cycle('odd', 'even') %>" id="campaigns_<%= cam.id %>">
+                  <td class="center"><span class="badge badge-info"><%= cam.id %></span></td>
+                  <td class="center"><img src="<%= cam.image.url %>" /></td>
+                  <td class="center"><%= cam.title %></td>
+                  <td class="center"><%= cam.content %></td>
+                  <td class="center"><%= cam.begin_date %></td>
+                  <td class="center"><%= cam.over_date %></td>
+                  <td class="center">
+                    <a class="btn btn-info" href="<%= edit_admin_campaign_path(cam.id) %>"><i class="icon-edit icon-white"></i>编辑</a>
+                    <a class="btn btn-danger" href="javascript: delete_resource('campaigns', <%= cam.id %>)"><i class="icon-trash icon-white"></i>删除</a>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div><!--/span-->
+
+  </div>
+</div>

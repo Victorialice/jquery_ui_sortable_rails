@@ -1,0 +1,38 @@
+<p class="presentation_c2ti"><img src="/assets/web/presentation_ti1.gif" /></p>
+<%= form_tag dologin_path, :method =>:post do %>
+    <div class="presentation_c2right">
+      <div class="login2_list">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="19%"><span>用户名：</span></td>
+            <td width="44%"><input name="name" type="text" class="login_input" /></td>
+            <td width="37%" rowspan="2" valign="top">
+              <input type="submit" value=""  class="login_icon" style="cursor: pointer;" />
+            </td>
+          </tr>
+          <tr>
+            <td><span>密&nbsp;&nbsp;&nbsp;码：</span></td>
+            <td><input name="password" type="password" class="login_input" /></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td colspan="2"><div class="login_text">
+              <p class="login_checkbox">
+                <input name="remember_me" type="checkbox" value="1" />
+              </p>
+              <p class="login_text1">记住会员ID</p>
+              <p class="login_text2"><a href="#">忘记密码</a> <a href="<%= signup_path %>"> 会员注册 </a></p>
+            </div></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td colspan="2"><div class=bshare-custom style="padding-right:63px;">
+              <div class="bsPromo bsPromo2"></div>
+              <a class=bshare-sinaminiblog title=分享到新浪微博 href="javascript:void(0);"></a> <a class=bshare-kaixin001 title=分享到开心网 href="javascript:void(0);"></a><a class=bshare-renren title=分享到人人网 buttonIndex="0"></a></div>
+              <script type=text/javascript charset=utf-8 src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+              <script type=text/javascript charset=utf-8 src="http://static.bshare.cn/b/bshareC0.js"></script></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+<% end %>

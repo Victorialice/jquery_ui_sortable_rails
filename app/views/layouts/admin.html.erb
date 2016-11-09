@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <meta name="csrf-token" content="<%= form_authenticity_token %>" />
+  <meta name="csrf-param" content="authenticity_token" />
+  <title>格力高后台管理</title>
+  <%= stylesheet_link_tag 'admin_init' %>
+  <%= javascript_include_tag 'admin_init' %>
+</head>
+<body>
+
+<% if controller_name == 'sessions' && action_name == 'new' %>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <%= yield %>
+      </div>
+    </div>
+<% else %>
+    <%= render :partial =>'admin/share/top' %>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <%= render :partial =>'admin/share/menu' %>
+        <%= yield %>
+      </div>
+    </div>
+<% end %>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!-- left menu starts -->
+<div class="span2 main-menu-span">
+  <div class="well nav-collapse sidebar-nav">
+    <ul class="nav nav-tabs nav-stacked main-menu">
+      <li class="nav-header hidden-tablet">主管理</li>
+      <li class="<%= menu_active('topimages') %>" style="margin-left: -2px;">
+        <a class="ajax-link" href="<%= admin_topimages_path %>"><i class="icon-home"></i><span class="hidden-tablet"> 首页图片</span></a>
+      </li>
+      <li class="<%= menu_active('campaigns') %>" style="margin-left: -2px;">
+        <a class="ajax-link" href="<%= admin_campaigns_path %>"><i class="icon-eye-open"></i><span class="hidden-tablet"> 活动管理</span></a>
+      </li>
+      <li class="<%= menu_active('award') %>" style="margin-left: -2px;">
+        <a class="ajax-link" href="<%= admin_addawarduser_path %>"><i class="icon-edit"></i><span class="hidden-tablet"> 获奖名单</span></a>
+      </li>
+      <li style="margin-left: -2px;">
+        <a class="ajax-link" href="<%= admin_news_index_path %>"><i class="icon-list-alt"></i><span class="hidden-tablet">新闻管理 </span></a>
+      </li>
+      <li style="margin-left: -2px;">
+        <a class="ajax-link" href="javascript:;"><i class="icon-font"></i><span class="hidden-tablet"> 其它管理</span></a>
+      </li>
+      <li style="margin-left: -2px;">
+        <a class="ajax-link" href="javascript:;"><i class="icon-picture"></i><span class="hidden-tablet"> 其它管理</span></a>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- left menu ends -->

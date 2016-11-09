@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+<h1>点击激活帐号</h1>
+<p>
+  请点击下面地址,以便激活你的账号
+  <a href="<%= ::UserMailer::URL %>/users/active?email=<%= @user.login %>&token=<%= @user.activation_code %>">
+    <%= ::UserMailer::URL %>/users/active?email=<%= @user.login %>&token=<%= @user.activation_code %>
+  </a>
+</p>
+</body>
+</html>
